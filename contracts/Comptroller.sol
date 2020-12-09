@@ -1426,8 +1426,8 @@ contract Comptroller is ComptrollerV4Storage, ComptrollerInterface, ComptrollerE
     }
 
     /**
-     * @notice Return the address of the COMP token
-     * @return The address of COMP
+     * @notice Return the address of the AMPT token
+     * @return The address of AMPT
      */
     function getCompAddress() public view returns (address) {
         return 0xc00e94Cb662C3520282E6f5717214004A7f26888;

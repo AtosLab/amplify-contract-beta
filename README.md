@@ -230,7 +230,7 @@ npx saddle deploy CompoundLens -n rinkeby
 npx saddle verify "{Etherscan Api Key}" "{发布的CompoundLens合约地址}" CompoundLens -n rinkeby
 ```
 
-# 10. 发布Maximillion合约
+## 10. 发布Maximillion合约
 ```shell
 # 发布
 npx saddle deploy Maximillion "{前面发布的cETH合约的地址}" -n rinkeby
@@ -240,8 +240,7 @@ npx saddle verify "{Etherscan Api Key}" "{发布的Maximillion合约地址}" Max
 ```
 
 
-
-# 11. 发布 Timelock 合约
+## 11. 发布 Timelock 合约
 Timelock是去中心化治理的时间锁合约
 ```shell
 # 发布
@@ -250,7 +249,7 @@ npx saddle deploy Timelock "{管理员地址：可以先填入自己的地址}" 
 npx saddle verify "{Etherscan Api Key}" "{发布的Timelock合约地址}" Timelock "{管理员地址：可以先填入自己的地址} 600 -n rinkeby
 ```
 
-# 12. 发布 GvernorAlpha 合约
+## 12. 发布 GvernorAlpha 合约
 GvernorAlpha是投票合约
 ```shell
 # 发布
@@ -260,12 +259,12 @@ npx saddle verify "{Etherscan Api Key}" "{发布的GvernorAlpha合约地址}" Go
 ```
 
 
-# 12. Timelock成为各个被治理合约的admin
+## 13. Timelock成为各个被治理合约的admin
 1）在各个被治理合约中，用原来的管理员调用 _setPendingAdmin 方法，设置Timelock合约 （ 0x6DB4152971E5C27f4e2273edC7dC656D510c5960 ）为pendingAdmin。
 
 2）通过timelock的 queueTransaction 和 executeTransaction方法，让timelock合约发起被治理合约的_acceptAdmin方法，接受成为被治理合约的管理员。
 
-# 设置 GvernorAlpha 为 timelock 的 admin
+## 14. 设置 GvernorAlpha 为 timelock 的 admin
 
 1）用TimeLock合约的 queueTransaction 和 executeTransaction 方法，调用自己的setPendingAdmin方法。
 

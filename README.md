@@ -3,8 +3,8 @@
 AMPLIFY - Decentralized Financial Infrastructure
 
 # Developmeny Environment
-solidity 5
-nodejs 10+
+* solidity ^0.5.16
+* nodejs 12+
 
 # Installion
 ```
@@ -25,6 +25,10 @@ Create a .env file in the project directory as follows
 ACCOUNT={Ethereum private key}
 ```
 The address of the private key of Ethereum needs to have eth token on the network as the gas fee.
+
+
+
+Take rinkeby network as example. create `~/.ethereum/rinkeby` file with Ethereum private key as content.
 
 
 ## 2. Deploy FaucetToken contracts
@@ -249,7 +253,7 @@ Timelock is the contract for decentralized governance
 # Deploy
 npx saddle deploy Timelock "{Administrator address}" 600 -n rinkeby
 # Verify on Etherscan.io
-npx saddle verify "{Etherscan Api Key}" "{Deployed Timelock Contract address}" Timelock "{Administrator address} 600 -n rinkeby
+npx saddle verify "{Etherscan Api Key}" "{Deployed Timelock Contract address}" Timelock "{Administrator address}" 600 -n rinkeby
 ```
 
 ## 12. Deploy GvernorAlpha Contract
@@ -264,14 +268,12 @@ npx saddle verify "{Etherscan Api Key}" "{Deployed GvernorAlpha Contract address
 
 ## 13. Set Timelock as the administrator of each governed contract
 
-1）In each governed contract, call _setPendingAdmin method with the old administrator, set the timelock contract as pendingAdmin.
+1）In each governed contract, call `_setPendingAdmin` method with the old administrator, set the timelock contract as `pendingAdmin`.
 
-2）Call queuetransaction and executetransaction of the Timelock contract to accept administrator permissions
+2）By calling `queueTransaction` and `executeTransaction` methods of timelock, let timelock contract invoke `_acceptAdmin` method of  governed contracts, so that it can be new administrator of governed contracts
 
-## 14. Set  GvernorAlpha as the administrator of Timelock
+## 14. Set  `GovernorAlpha` as the administrator of Timelock
 
-1）Call queuetransaction and executetransaction methods of the Timelock contract to set the GvernorAlpha as pendingAdmin.
+1）Use `queueTransaction` and `executetransaction` methods of the Timelock contract to invoke TimeLock contract's `setPendingAdmin` method
 
-2）Call __acceptAdmin method of ths GvernorAlpha to become the administrator of Timelock
-
-
+2) Invoke `_acceptAdmin` method of `GovernorAlpha` contract so that it will be admin for TimeLock contract
